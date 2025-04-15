@@ -29,24 +29,41 @@ docker compose run list-file
 
 # Document
 
-## Architecture
 
-### Requirements
+## Requirements
 
 **Note**: As there are no explicit requirements, all of the following requirements are based on my assumptions.
 
 
 Features:
-- Upload: 
-upload file with unique name, size limit 50MB
+- Upload:
+  + Upload file with unique name.
+  + Size limit 50MB
 
 - Delete:
-  delete file by name.
+  + Delete file by name.
 
 - List flie:
-  List all files.
+  + List all files.
 
-  
+## Architecture
+  ![image](https://github.com/user-attachments/assets/f10daf0f-89df-4e0c-9d87-4b0b3d668fe7)
+
+
+### Component
+**1. Cli**
+ - a cli developed by cobra cli framework to interact with storage server.
+
+**2. storage server**
+ - a go-based application handle business logic, recive request and
+
+**3. storage**
+ - For simplicity, I will choose local storage.
+ - Architecture design and code design are easy to extend/adapt new kind of storage, for e.g aws S3, azure storage,etc..
+
+**4. metadata DB**
+ - Store metadata of file, such as name, filepath, etc..
+ - Relational DB woul be a good choice in this case for f
 
 This is a simple hello, world demonstration web server.
 
