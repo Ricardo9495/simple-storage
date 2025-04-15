@@ -49,13 +49,24 @@ Features:
 ## Architecture
   ![image](https://github.com/user-attachments/assets/f10daf0f-89df-4e0c-9d87-4b0b3d668fe7)
 
-
+```
+                                    |--> storage
+                                    |
+storage-cli ----> storage-server ---
+                                    |
+                                    |---> metadata
+```
 ### Component
-**1. Cli**
+**1. storage cli**
  - a cli developed by cobra cli framework to interact with storage server.
 
 **2. storage server**
- - a go-based application handle business logic, recive request and
+ - a go-based application handle business logic.
+   + recieve request.
+   + validate parameters.
+   + validate file.
+   + upload file to storage.
+   + save metadata to db.
 
 **3. storage**
  - For simplicity, I will choose local storage.
@@ -63,18 +74,12 @@ Features:
 
 **4. metadata DB**
  - Store metadata of file, such as name, filepath, etc..
- - Relational DB woul be a good choice in this case for f
-
-This is a simple hello, world demonstration web server.
-
-It serves version information on /version and answers any other request like /name by saying "Hello, name!".
+ - Relational DB woul be a good choice in this case for for future extension of project, for e.g adding user, permission, etc..
 
 
-migrate -path migrations -database '$(PG_URL)?sslmode=disable' up
-
-
-migrate -source file://./internal/migrations -database "postgres://user:pass@localhost:5432/postgres?sslmode=disable" up
-
-
-curl -X POST -F "file=@./internal/interfaces/sample.txt" http://localhost:8080/files
+## Enhancement
+In future we can add
+- Authentication/Authorization in middleware of simple-storage.
+- Validate duplication file using hash.
+- Upload file to cloud storage.
 
